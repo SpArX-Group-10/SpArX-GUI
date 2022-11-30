@@ -12,8 +12,10 @@ import SparxInfo from "./classes/SparxInfo";
 import React from "react";
 import { Box, Stack, Typography, Paper } from "@mui/material";
 
+import { ISDEV } from "./classes/Utility";
+
 const API_ENDPOINT = "http://127.0.0.1:5000/api/sparx";
-const DATABASE_ENDPOINT = "http://127.0.0.1:5001/api/save_vis";
+const DATABASE_ENDPOINT = ISDEV ? "http://127.0.0.1:5001/api/save_vis" : "https://sparx-vis.herokuapp.com/api/save_vis";
 
 function Landing() {
   const [componentsIndex, setComponentsIndex] = useState(0);

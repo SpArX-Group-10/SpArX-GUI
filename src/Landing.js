@@ -12,7 +12,8 @@ import SparxInfo from "./classes/SparxInfo";
 import React from "react";
 import { Box, Stack, Typography, Paper } from "@mui/material";
 
-const API_ENDPOINT = "api/sparx";
+const API_ENDPOINT = "http://127.0.0.1:5000/api/sparx";
+const DATABASE_ENDPOINT = "http://127.0.0.1:5001/api/save_vis";
 
 function Landing() {
   const [componentsIndex, setComponentsIndex] = useState(0);
@@ -64,8 +65,16 @@ function Landing() {
     })
       .then((response) => response.json())
       .then(
-        (data) => console.log("Success:", data)
+        // (data) => console.log("Success:", data)
         // navigate("/visualisation", { state: { graphJSON: data } })
+        (data) =>
+          fetch(DATABASE_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.text())
+            .then((data) => console.log(data))
       );
   };
 

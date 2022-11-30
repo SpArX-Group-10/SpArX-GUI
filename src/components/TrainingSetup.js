@@ -25,8 +25,7 @@ function TrainingSetup({ trainingSetupCallback }) {
                     value={epochs}
                     onChange={(e) => {
                         // Ensure that the number of epochs is a integer
-                        e.target.value = parseInt(e.target.value);
-                        setEpochs(e.target.value);
+                        setEpochs(parseInt(e.target.value));
                     }}
                 />
             </Typography>
@@ -36,7 +35,7 @@ function TrainingSetup({ trainingSetupCallback }) {
                     placeholder="Learning Rate"
                     type="number"
                     value={learningRate}
-                    onChange={(e) => { setLearningRate(e.target.value) }}
+                    onChange={(e) => { setLearningRate(parseFloat(e.target.value)) }}
                 />
             </Typography>
 
@@ -45,7 +44,7 @@ function TrainingSetup({ trainingSetupCallback }) {
                     placeholder="Validation Split"
                     type="number"
                     value={validationSplit}
-                    onChange={(e) => { setValidationSplit(e.target.value) }}
+                    onChange={(e) => { setValidationSplit(parseFloat(e.target.value)) }}
                 />
             </Typography>
 

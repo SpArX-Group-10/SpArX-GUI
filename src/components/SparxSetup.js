@@ -40,7 +40,7 @@ function SparxSetup({ dataset, sparxSetupCallback }) {
                     placeholder="Shrinkage"
                     type="number"
                     value={shrinkage}
-                    onChange={(e) => { setShrinkage(e.target.value) }}
+                    onChange={(e) => { setShrinkage(parseFloat(e.target.value)) }}
                 />
             </Typography>
 

@@ -23,6 +23,4 @@ const numericInputCreator = (name, value, callback, parser) => {
     );
 };
 
-const ISDEV = process.env.DEV === "true";
-
-export { selectorCreator, numericInputCreator, ISDEV };
+export { selectorCreator, numericInputCreator };

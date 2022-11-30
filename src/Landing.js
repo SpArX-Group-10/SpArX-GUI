@@ -12,10 +12,11 @@ import SparxInfo from "./classes/SparxInfo";
 import React from "react";
 import { Box, Stack, Typography, Paper } from "@mui/material";
 
-import { ISDEV } from "./classes/Utility";
+const ISDEV = process.env.NODE_ENV === "development";
 
 const API_ENDPOINT = "http://127.0.0.1:5000/api/sparx";
 const DATABASE_ENDPOINT = ISDEV ? "http://127.0.0.1:5001/api/save_vis" : "https://sparx-vis.herokuapp.com/api/save_vis";
+const VIS_ENDPOINT = ISDEV ? "http://127.0.0.1:3000/" : "https://sparx-vis.herokuapp.com/";
 
 function Landing() {
   const [componentsIndex, setComponentsIndex] = useState(0);
@@ -25,6 +26,9 @@ function Landing() {
   const [modelInfo, setModelInfo] = useState(ModelInfo.empty());
   const [trainingInfo, setTrainingInfo] = useState(TrainingInfo.empty());
   const [sparxInfo, setSparxInfo] = useState(SparxInfo.empty());
+
+  const [loading, setLoading] = useState(false);
+  const [displayURL, setDisplayURL] = useState("");
 
   const devMode = false;
 
@@ -60,6 +64,7 @@ function Landing() {
       sparxInfo: sparxInfo,
     };
 
+    setLoading(true);
     fetch(API_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -76,7 +81,10 @@ function Landing() {
             body: JSON.stringify(data),
           })
             .then((response) => response.text())
-            .then((data) => console.log(data))
+            .then((data) => {
+              setDisplayURL(VIS_ENDPOINT + data);
+              setLoading(false);
+            })
       );
   };
 
@@ -85,7 +93,7 @@ function Landing() {
     <ModelSetup inOutShape={inOutShape} modelCallback={modelCallback} />,
     <TrainingSetup trainingSetupCallback={trainingSetupCallback} />,
     <SparxSetup dataset={dataset} sparxSetupCallback={sparxSetupCallback} />,
-    <p>Waiting for server to respond</p>,
+    loading ? <p>Waiting for server to respond</p> : <a href={displayURL}>Click here to view visualisation</a>,
   ];
 
   return (

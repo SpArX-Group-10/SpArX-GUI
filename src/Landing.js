@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Box, Button, Stack, Typography, Paper } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import DatasetSelection from "./components/DatasetSelection";
 import ModelSetup from "./components/ModelSetup";
@@ -9,14 +11,30 @@ import Dataset from "./classes/Dataset";
 import ModelInfo from "./classes/ModelInfo";
 import TrainingInfo from "./classes/TrainingInfo";
 import SparxInfo from "./classes/SparxInfo";
-import React from "react";
-import { Box, Stack, Typography, Paper } from "@mui/material";
-
-const ISDEV = process.env.NODE_ENV === "development";
 
 const API_ENDPOINT = "http://127.0.0.1:5000/api/sparx";
-const DATABASE_ENDPOINT = ISDEV ? "http://127.0.0.1:5001/api/save_vis" : "https://sparx-vis.herokuapp.com/api/save_vis";
-const VIS_ENDPOINT = ISDEV ? "http://127.0.0.1:3000/" : "https://sparx-vis.herokuapp.com/";
+const DATABASE_ENDPOINT = "https://sparx-vis.herokuapp.com/api/save_vis";
+const VIS_ENDPOINT = "https://sparx-vis.herokuapp.com/";
+
+function BackComponent({ backCallback }) {
+  return (
+    <Box>
+      <Button
+        variant="contained"
+        style={{
+          borderRadius: "50%",
+          height: "65px",
+          width: "20px",
+          backgroundColor: "#1565C0",
+          color: "white",
+        }}
+        onClick={backCallback}
+      >
+        <ArrowBackIcon />
+      </Button>
+    </Box>
+  );
+}
 
 function Landing() {
   const [componentsIndex, setComponentsIndex] = useState(0);
@@ -53,6 +71,10 @@ function Landing() {
     setComponentsIndex(componentsIndex + 1);
 
     sendToServer(rSparxInfo);
+  };
+
+  const backCallback = () => {
+    setComponentsIndex(componentsIndex - 1);
   };
 
   const sendToServer = (sparxInfo) => {
@@ -93,7 +115,14 @@ function Landing() {
     <ModelSetup inOutShape={inOutShape} modelCallback={modelCallback} />,
     <TrainingSetup trainingSetupCallback={trainingSetupCallback} />,
     <SparxSetup dataset={dataset} sparxSetupCallback={sparxSetupCallback} />,
-    loading ? <p>Waiting for server to respond</p> : <a href={displayURL}>Click here to view visualisation</a>,
+    loading ? (
+      <p>Waiting for server to respond</p>
+    ) : (
+      <div>
+        <a href={displayURL}>Click here to view visualisation</a>
+        <BackComponent backCallback={backCallback} />
+      </div>
+    ),
   ];
 
   return (

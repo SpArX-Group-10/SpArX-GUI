@@ -5,7 +5,7 @@ Local-host:
 ===========
 1. Clone repo from: [https://github.com/SpArX-Group-10/SpArX-GUI](https://github.com/SpArX-Group-10/SpArX-GUI)
     ```bash
-    git clone --recurse-submodules https://github.com/SpArX-Group-10/SpArX-GUI
+    git clone https://github.com/SpArX-Group-10/SpArX-GUI
     ```
 
 2.  Install requirements:
@@ -14,18 +14,13 @@ Local-host:
     pip install -r requirements.txt
     ```
 
-3. Install SpArX pip library:
-   ```bash
-   pip install sparx-lib
-   ```
-
-4. Start up the server:
+3. Start up the server:
 
    ```bash
    python server/server.py
    ```
 
-5. To run the GUI, in a separate terminal, install yarn dependencies and start:
+4. To run the GUI, in a separate terminal, install yarn dependencies and start:
    
    ```bash
    yarn install

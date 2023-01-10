@@ -14,17 +14,14 @@ Local-host:
     pip install -r requirements.txt
     ```
 
-3. Start up the server:
+3.  Give permission to the start script:
+    ```bash
+    chmod +x ./start.sh
+    ```
 
+4. To run the GUI, run the following bash script:
    ```bash
-   python server/server.py
-   ```
-
-4. To run the GUI, in a separate terminal, install yarn dependencies and start:
-   
-   ```bash
-   yarn install
-   yarn start
+   ./start.sh
    ```
 
 GUI: Model setup:

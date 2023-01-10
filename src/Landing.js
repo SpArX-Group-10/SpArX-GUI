@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Button, Stack, Typography, Paper } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { QRCodeCanvas } from "qrcode.react";
 
 import DatasetSelection from "./components/DatasetSelection";
 import ModelSetup from "./components/ModelSetup";
@@ -47,6 +48,28 @@ function Landing() {
 
   const [loading, setLoading] = useState(false);
   const [displayURL, setDisplayURL] = useState("");
+  const [shortenedURL, setShortenedURL] = useState("");
+
+  useEffect(() => {
+    if (displayURL.length > 0) {
+      fetch("https://api-ssl.bitly.com/v4/shorten", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer 1a7269c040b9af522c8c8ac58a52e34aea129539",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          long_url: displayURL,
+          domain: "bit.ly",
+          group_guid: "Bn1agpOxm5n",
+        }),
+      }).then((response) => {
+        response.json().then((j) => {
+          setShortenedURL(j["link"]);
+        });
+      });
+    }
+  }, [displayURL]);
 
   const devMode = false;
 
@@ -119,7 +142,13 @@ function Landing() {
       <p>Waiting for server to respond</p>
     ) : (
       <div>
-        <a href={displayURL}>Click here to view visualisation</a>
+        <QRCodeCanvas value={displayURL} style={{ margin: 10 }} size={160} />
+        <p>
+          Shortened URL: <a href={shortenedURL}>{shortenedURL}</a>
+        </p>
+        <p>
+          <a href={displayURL}>Click here to view visualisation</a>
+        </p>
         <BackComponent backCallback={backCallback} />
       </div>
     ),

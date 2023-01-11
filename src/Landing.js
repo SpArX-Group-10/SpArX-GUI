@@ -117,8 +117,6 @@ function Landing() {
     })
       .then((response) => response.json())
       .then(
-        // (data) => console.log("Success:", data)
-        // navigate("/visualisation", { state: { graphJSON: data } })
         (data) =>
           fetch(DATABASE_ENDPOINT, {
             method: "POST",
@@ -135,9 +133,9 @@ function Landing() {
 
   let components = [
     <DatasetSelection selectedDatasetCallback={selectedDatasetCallback} />,
-    <ModelSetup inOutShape={inOutShape} modelCallback={modelCallback} />,
-    <TrainingSetup trainingSetupCallback={trainingSetupCallback} />,
-    <SparxSetup dataset={dataset} sparxSetupCallback={sparxSetupCallback} />,
+    <ModelSetup inOutShape={inOutShape} modelCallback={modelCallback} backCallback={backCallback} />,
+    <TrainingSetup trainingSetupCallback={trainingSetupCallback} backCallback={backCallback} />,
+    <SparxSetup dataset={dataset} sparxSetupCallback={sparxSetupCallback} backCallback={backCallback} />,
     loading ? (
       <p>Waiting for server to respond</p>
     ) : (
@@ -157,7 +155,7 @@ function Landing() {
   return (
     <Box
       sx={{
-        backgroundColor: "#1565C0",
+        backgroundColor: "#001e3c",
         height: "100vh",
         width: "100vw",
         justifyContent: "center",

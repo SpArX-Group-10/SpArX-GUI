@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Button, Input, Typography, Select, MenuItem } from "@mui/material";
+import BackComponent from "./BackButton";
 import { Optimiser, LossFunction } from "../classes/Enums";
 import { selectorCreator, numericInputCreator } from "../classes/Utility";
 import TrainingInfo from "../classes/TrainingInfo";
 
-function TrainingSetup({ trainingSetupCallback }) {
+function TrainingSetup({ trainingSetupCallback, backCallback }) {
     const [epochs, setEpochs] = useState(100);
     const [learningRate, setLearningRate] = useState(0.001);
     const [validationSplit, setValidationSplit] = useState(0.2);
@@ -73,7 +74,7 @@ function TrainingSetup({ trainingSetupCallback }) {
                     <MenuItem value={LossFunction.CategoricalCrossentropy}> Categorical Cross Entropy </MenuItem>
                 </Select>
             </Typography>
-
+            <BackComponent backCallback={backCallback} />
             <Button
                 variant="contained"
                 component="label"

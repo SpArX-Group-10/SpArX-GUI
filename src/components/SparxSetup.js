@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Box, Button, Input, Typography, Select, MenuItem } from "@mui/material";
+import BackComponent from "./BackButton";
 import { numericInputCreator, selectorCreator } from "../classes/Utility";
 import { Clusterer, Merger } from "../classes/Enums";
 import SparxInfo from "../classes/SparxInfo";
@@ -15,7 +16,7 @@ function DatapointInputs({ datapoint, xHeaders, dataPointCallback }) {
     return <div>{elements}</div>;
 }
 
-function SparxSetup({ dataset, sparxSetupCallback }) {
+function SparxSetup({ dataset, sparxSetupCallback, backCallback }) {
     const [shrinkage, setShrinkage] = useState(0.5);
     const [clusterer, setClusterer] = useState(Clusterer.KMeans);
     const [merger, setMerger] = useState(Merger.Global);
@@ -86,6 +87,7 @@ function SparxSetup({ dataset, sparxSetupCallback }) {
                 </Box>
             )}
 
+            <BackComponent backCallback={backCallback}/>
             <Button
                 variant="contained"
                 component="label"

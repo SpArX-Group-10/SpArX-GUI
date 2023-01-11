@@ -1,6 +1,7 @@
 import { Box, Button, Typography, Input, Select, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { ActivationFunction } from "../classes/Enums";
+import BackComponent from "./BackButton";
 
 import LayerInfo from "../classes/LayerInfo";
 import ModelInfo from "../classes/ModelInfo";
@@ -8,6 +9,7 @@ import ModelInfo from "../classes/ModelInfo";
 function LayerInfoComponent({
   layerInfo,
   layerIndex,
+  layerName,
   nueronCountCallback,
   activationCallback,
   removeCallback,
@@ -19,9 +21,10 @@ function LayerInfoComponent({
       {key}
     </option>
   ));
+
   return (
     <div>
-      <Typography variant="h6"> Layer {layerIndex + 1} </Typography>
+      <Typography variant="h6"> {layerName} </Typography>
       Neuron Count:{" "}
       <Input
         type="number"
@@ -61,7 +64,7 @@ function LayerInfoComponent({
   );
 }
 
-function ModelSetup({ inOutShape, modelCallback }) {
+function ModelSetup({ inOutShape, modelCallback, backCallback }) {
   const [inputLayerInfo, _] = useState(new LayerInfo(inOutShape[0], ActivationFunction.None));
   const [layerInfos, setLayerInfos] = useState([]);
   const [outputLayerInfo, setOutputLayerInfo] = useState(new LayerInfo(inOutShape[1], ActivationFunction.Sigmoid));
@@ -104,6 +107,7 @@ function ModelSetup({ inOutShape, modelCallback }) {
       key={"layerInfo" + i}
       layerInfo={layerInfo}
       layerIndex={i}
+      layerName={"Layer " + (i + 1)}
       nueronCountCallback={nueronCountCallback}
       activationCallback={activationCallback}
       removeCallback={removeCallback}
@@ -123,7 +127,7 @@ function ModelSetup({ inOutShape, modelCallback }) {
           marginTop: 20,
         }}
       >
-        <LayerInfoComponent layerInfo={inputLayerInfo} layerIndex={-1} lockCount={true} lockActivation={true} />
+        <LayerInfoComponent layerInfo={inputLayerInfo} layerIndex={-1} layerName={"Input Layer"} lockCount={true} lockActivation={true} />
         {layerInfoComponents}
         <Button variant="contained" component="label" style={{ backgroundColor: "#1565C0" }} onClick={addNewInfoLayer}>
           {" "}
@@ -132,17 +136,22 @@ function ModelSetup({ inOutShape, modelCallback }) {
         <LayerInfoComponent
           layerInfo={outputLayerInfo}
           layerIndex={layerInfos.length}
+          layerName={"Output Layer"}
           lockCount={true}
           activationCallback={activationCallback}
         />
+        
+      </Box>
+      <Box>
+        <BackComponent backCallback={backCallback} />
         <Button
-          variant="contained"
-          component="label"
-          style={{ backgroundColor: "#1565C0" }}
-          onClick={(_e) => nextClick()}
-        >
-          {" "}
-          Next{" "}
+            variant="contained"
+            component="label"
+            style={{ backgroundColor: "#1565C0" }}
+            onClick={(_e) => nextClick()}
+          >
+            {" "}
+            Next{" "}
         </Button>
       </Box>
     </div>

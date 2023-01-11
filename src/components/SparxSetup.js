@@ -35,7 +35,7 @@ function SparxSetup({ dataset, sparxSetupCallback }) {
 
     return (
         <div>
-            <Typography variant="h6"> Shrinkage: {" "}
+            <Typography variant="h6" style={{margin: 10}}> Shrinkage: {" "}
                 <Input
                     placeholder="Shrinkage"
                     type="number"
@@ -44,7 +44,7 @@ function SparxSetup({ dataset, sparxSetupCallback }) {
                 />
             </Typography>
 
-            <Typography variant="h6"> Clusterer: {" "}
+            <Typography variant="h6" style={{margin: 10}}> Clusterer: {" "}
                 <Select
                     placeholder="Clusterer"
                     value={clusterer}
@@ -55,7 +55,7 @@ function SparxSetup({ dataset, sparxSetupCallback }) {
                 </Select>
             </Typography>
 
-            <Typography variant="h6"> Merger: {" "}
+            <Typography variant="h6" style={{margin: 10}}> Merger: {" "}
                 <Select
                     placeholder="Merger"
                     value={merger}

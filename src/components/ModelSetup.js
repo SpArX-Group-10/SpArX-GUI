@@ -50,7 +50,7 @@ function LayerInfoComponent({
         <Button
           variant="contained"
           component="label"
-          style={{ backgroundColor: "#1565C0" }}
+          style={{ backgroundColor: "#1565C0", margin: 10 }}
           onClick={() => removeCallback(layerIndex)}
         >
           {" "}
@@ -111,21 +111,21 @@ function ModelSetup({ inOutShape, modelCallback }) {
   ));
 
   return (
-    <div>
+    <Box style={{height: "100%", width: "100%"}}>
       <Box
         style={{
           justifyContent: "center",
           alignItems: "start",
           flexDirection: "column",
           flexWrap: "wrap",
-          height: "30vh",
+          height: "11vh",
           overflow: "auto",
           marginTop: 20,
         }}
       >
         <LayerInfoComponent layerInfo={inputLayerInfo} layerIndex={-1} lockCount={true} lockActivation={true} />
         {layerInfoComponents}
-        <Button variant="contained" component="label" style={{ backgroundColor: "#1565C0" }} onClick={addNewInfoLayer}>
+        <Button variant="contained" component="label" style={{ backgroundColor: "#1565C0", margin: 10 }} onClick={addNewInfoLayer}>
           {" "}
           Add new Layer{" "}
         </Button>
@@ -135,17 +135,18 @@ function ModelSetup({ inOutShape, modelCallback }) {
           lockCount={true}
           activationCallback={activationCallback}
         />
-        <Button
+        
+      </Box>
+      <Button
           variant="contained"
           component="label"
-          style={{ backgroundColor: "#1565C0" }}
+          style={{ backgroundColor: "#1565C0", marginTop: 20 }}
           onClick={(_e) => nextClick()}
         >
           {" "}
           Next{" "}
         </Button>
-      </Box>
-    </div>
+    </Box>
   );
 }
 

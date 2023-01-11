@@ -18,7 +18,7 @@ function TrainingSetup({ trainingSetupCallback }) {
 
     return (
         <div>
-            <Typography variant="h6"> Epochs: {" "}
+            <Typography variant="h6" style={{margin: 10}}> Epochs: {" "}
                 <Input
                     placeholder="Epochs"
                     type="number"
@@ -30,7 +30,7 @@ function TrainingSetup({ trainingSetupCallback }) {
                 />
             </Typography>
 
-            <Typography variant="h6"> Learning Rate: {" "}
+            <Typography variant="h6" style={{margin: 10}}> Learning Rate: {" "}
                 <Input
                     placeholder="Learning Rate"
                     type="number"
@@ -39,7 +39,7 @@ function TrainingSetup({ trainingSetupCallback }) {
                 />
             </Typography>
 
-            <Typography variant="h6"> Validation Split: {" "}
+            <Typography variant="h6" style={{margin: 10}}> Validation Split: {" "}
                 <Input
                     placeholder="Validation Split"
                     type="number"
@@ -48,7 +48,7 @@ function TrainingSetup({ trainingSetupCallback }) {
                 />
             </Typography>
 
-            <Typography variant="h6"> Optimiser: {" "}
+            <Typography variant="h6" style={{margin: 10}}> Optimiser: {" "}
                 <Select
                     placeholder="Optimiser"
                     value={optimiser}
@@ -62,7 +62,7 @@ function TrainingSetup({ trainingSetupCallback }) {
                 </Select>
             </Typography>
 
-            <Typography variant="h6"> Loss Function: {" "}
+            <Typography variant="h6" style={{margin: 10}}> Loss Function: {" "}
                 <Select
                     placeholder="Loss Function"
                     value={lossFunction}

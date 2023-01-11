@@ -118,7 +118,7 @@ function ModelSetup({ inOutShape, modelCallback }) {
           alignItems: "start",
           flexDirection: "column",
           flexWrap: "wrap",
-          height: "11vh",
+          height: "75%",
           overflow: "auto",
           marginTop: 20,
         }}
